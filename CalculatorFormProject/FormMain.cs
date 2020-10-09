@@ -199,6 +199,12 @@ namespace CalculatorFormProject
             return number.ToString("N16");
         }
 
+        /// <summary>
+        /// Format the number using thousend separator and 16 decimal digits.
+        /// </summary>
+        /// <param name="the number format."></param>
+        /// <returns>A string with thousend separator and maximum of 16 digit after the decimal digits point. </returns>
+
         private void clearAll(double numberToWrite = 0)
         {
             operand1 = 0;
