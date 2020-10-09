@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CalculatorFormProject
@@ -201,8 +195,8 @@ namespace CalculatorFormProject
 
         private string getFormattedNumber(double number)
         {
-            return String.Format("{0:0,0.0000000000000000}", number);
-            // return number.ToString("N", CultureInfo.InvariantCulture);	
+            //return String.Format("{0:0,0.0000000000000000}", number);
+            return number.ToString("N16");
         }
 
         private void clearAll(double numberToWrite = 0)

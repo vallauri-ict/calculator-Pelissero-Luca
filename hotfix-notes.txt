@@ -1,1 +1,1 @@
-This hotfix solve a problem with the resault decimal number formatting
+This hotfix solve a problem with the result decimal number formatting
