@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace CalculatorFormProject
@@ -193,17 +194,19 @@ namespace CalculatorFormProject
             lastButtonClicked = bs;
         }
 
-        private string getFormattedNumber(double number)
-        {
-            //return String.Format("{0:0,0.0000000000000000}", number);
-            return number.ToString("N16");
-        }
-
         /// <summary>
         /// Format the number using thousend separator and 16 decimal digits.
         /// </summary>
-        /// <param name="the number format."></param>
+        /// <param name="number">the number format.</param>
         /// <returns>A string with thousend separator and maximum of 16 digit after the decimal digits point. </returns>
+
+        private string getFormattedNumber(double number)
+        {
+            //return String.Format("{0:0,0.0000000000000000}", number);
+            char decimalSeparator = Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
+            // TrimEnd --> toglie gli zeri inutili a partire dal fondo
+            return number.ToString("N16").TrimEnd(decimalSeparator);  
+        }
 
         private void clearAll(double numberToWrite = 0)
         {
@@ -253,7 +256,7 @@ namespace CalculatorFormProject
                         lastOperator = bs.Content;
                         operand2 = 0;
                     }
-                    
+
                     resultBox.Text = getFormattedNumber(result);
                 }
             }

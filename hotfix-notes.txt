@@ -1,1 +1,2 @@
 This hotfix solve a problem with the result decimal number formatting
+14/10/2020: Better and now perfect resault formatting (directly on develope branch)
