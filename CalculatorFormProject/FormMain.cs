@@ -1,7 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CalculatorFormProject
@@ -39,7 +45,7 @@ namespace CalculatorFormProject
         private ButtonStruct[,] buttons =
         {
              { new ButtonStruct(' ', false), new ButtonStruct(' ', false), new ButtonStruct('C', false), new ButtonStruct('<', false) },
-                { new ButtonStruct(' ', false), new ButtonStruct(' ', false), new ButtonStruct(' ', false), new ButtonStruct('/', false, false, false, false, true) },
+                { new ButtonStruct('¼', false, false, false, false, true), new ButtonStruct(' ', false, false, false, false, true), new ButtonStruct(' ', false, false, false, false, true), new ButtonStruct('/', false, false, false, false, true) },
                 { new ButtonStruct('7', true, true), new ButtonStruct('8', true, true), new ButtonStruct('9', true, true), new ButtonStruct('x', false, false, false, false, true) },
                 { new ButtonStruct('4', true, true), new ButtonStruct('5', true, true), new ButtonStruct('6', true, true), new ButtonStruct('-', false, false, false, false, true) },
                 { new ButtonStruct('1', true, true), new ButtonStruct('2', true, true), new ButtonStruct('3', true, true), new ButtonStruct('+', false, false, false, false, true) },
@@ -197,15 +203,13 @@ namespace CalculatorFormProject
         /// <summary>
         /// Format the number using thousend separator and 16 decimal digits.
         /// </summary>
-        /// <param name="number">the number format.</param>
-        /// <returns>A string with thousend separator and maximum of 16 digit after the decimal digits point. </returns>
-
+        /// <param name="number">The number to format.</param>
+        /// <returns>A string with thousend separator and a maximum of 16 digit after the decimal point.</returns>
         private string getFormattedNumber(double number)
         {
-            //return String.Format("{0:0,0.0000000000000000}", number);
+            // return String.Format("{0:0,0.0000000000000000}", number);
             char decimalSeparator = Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
-            // TrimEnd --> toglie gli zeri inutili a partire dal fondo
-            return number.ToString("N16").TrimEnd(decimalSeparator);  
+            return number.ToString("N16").TrimEnd('0').TrimEnd(decimalSeparator);
         }
 
         private void clearAll(double numberToWrite = 0)
@@ -246,6 +250,9 @@ namespace CalculatorFormProject
                             break;
                         case '/':
                             result = operand1 / operand2;
+                            break;
+                        case '¼':
+                            result = 1 / result; // TODO: gestire casi particolari
                             break;
                         default:
                             break;
